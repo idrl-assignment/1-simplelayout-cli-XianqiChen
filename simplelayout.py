@@ -25,7 +25,7 @@ def main():
     if len(args.positions) != args.unit_n:
         sys.exit()
     for pos in args.positions:
-        if pos < 1 | (pos > (args.board_grid / args.unit_grid) ** 2):
+        if pos < 1 or (pos > (args.board_grid / args.unit_grid) ** 2):
             sys.exit()
 
     # 要求 3
@@ -34,10 +34,14 @@ def main():
     if not os.path.exists(target_path):
         os.makedirs(target_path)
     output_path = os.path.join(target_path, args.file_name)
-    fp = open(output_path + ".mat", "a")
-    fp.close()
-    fp = open(output_path + ".jpg", "a")
-    fp.close()
+    # fp = open(output_path + ".mat", "a")
+    # fp.close()
+    # fp = open(output_path + ".jpg", "a")
+    # fp.close()
+    with open(output_path + ".mat", "a") as _:  # with可在文件异常时正常close
+        pass
+    with open(output_path + ".jpg", "a") as _:
+        pass
 
 
 if __name__ == "__main__":
